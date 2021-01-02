@@ -35,6 +35,7 @@ before going to production](https://airflowsummit.org/slides/j2-Ensuring-your-DA
 
 [Airflow Demystified](https://medium.com/@omidvd/airflow-file-sensor-example-airflow-demystified-50584bca1628)
 
+[How to pass arguments to Python Function](https://marclamberti.com/blog/airflow-pythonoperator/)
 # GitHubs
 
 [danielvdende:data-testing-with-airflow](https://github.com/danielvdende/data-testing-with-airflow/tree/master/dags/tests)
