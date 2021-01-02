@@ -1,5 +1,5 @@
 """
-Sensoring Files.
+Using sensors to sense files
 
 It is required that a file exists ina  folder to proceed with
 the next task.
@@ -11,6 +11,17 @@ When the files is detected the next task is executed.
 Source: https://www.youtube.com/watch?v=I7Mhs4W3Whs&list=PLcoE64orFoVsyzbvfgiY5iNKo30fJ4IWm&index=6&ab_channel=RocketMan
 
 To pass values between tasks we can use XCom
+
+FileSensor receives:
+    - filepath : it is the file name
+    - fs_conn_id: it is the path where the file needs to be.
+                  It is configure in webserver UI(Admin-Connections)
+
+To configure a connection we need to provide a
+    - Conn ID: give a name for your connection
+    - Conn Type: choose the connection type. If the file is in your filesystem choose the option File(path)
+    - Extra: type the file path like this: {"path": "\path_to_the_file"
+
 """
 from datetime import timedelta
 from airflow.models import DAG
@@ -23,7 +34,7 @@ args = {
     'start_date': days_ago(1),
 }
 
-dag = DAG(dag_id='my_first_sensor',
+dag = DAG(dag_id='my_first_sensor_2',
           default_args=args,
           schedule_interval=None)
 
@@ -32,12 +43,11 @@ def say_hi(**context):
     print('hi')
 
 
-file_path = '/Documents/airflow_tests/'
 file_name = 'test.txt'
-full_filepath = file_path + file_name
 
 sensing_task = FileSensor(task_id='sensing_task',
-                          filepath=full_filepath,
+                          filepath=file_name,
+                          fs_conn_id='my_file_system',
                           poke_interval=10,
                           dag=dag
                           )
